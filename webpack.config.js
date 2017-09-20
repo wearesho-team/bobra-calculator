@@ -29,7 +29,7 @@ const config = {
         filename: 'index.js',
         path: path.resolve('./build'),
         publicPath: "/",
-        library: "cpa-integration",
+        library: "bobra-calculator",
         libraryTarget: "umd",
     },
 
@@ -46,7 +46,7 @@ const config = {
     module: {
         loaders: [
             {
-                test: /\.ts$/,
+                test: /\.tsx?$/,
                 loaders: [
                     {
                         loader: "babel-loader",
@@ -59,11 +59,11 @@ const config = {
             }
             ,
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: [/node_modules/],
                 loader: "babel-loader",
                 query: {
-                    presets: ['es2015', 'stage-0', 'stage-1',]
+                    presets: ["latest", "react",]
                 },
             },
             {
