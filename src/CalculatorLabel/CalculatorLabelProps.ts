@@ -2,7 +2,10 @@ import * as React from "react";
 import * as PropTypes from "prop-types";
 
 export enum CalculatorLabelTypes {
-    amount, term, interest, total,
+    amount = "amount",
+    term = "term",
+    interest = "interest",
+    total = "total",
 }
 
 export interface CalculatorLabelProps extends React.HTMLProps<HTMLSpanElement> {
