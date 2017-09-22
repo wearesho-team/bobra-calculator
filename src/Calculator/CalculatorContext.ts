@@ -11,16 +11,18 @@ export interface CalculatorContext {
             min: number,
             max: number,
             step: number,
+            initial: number,
         },
         Amount: {
             min: number,
             max: number,
             step: number,
+            initial: number,
         },
     },
 
-    onAmountChange: (nextAmount: number) => void,
-    onTermChange: (nextTerm: number) => void,
+    onAmountChange: (nextAmount: number) => number,
+    onTermChange: (nextTerm: number) => number,
 }
 
 export const CalculatorContextTypes = {

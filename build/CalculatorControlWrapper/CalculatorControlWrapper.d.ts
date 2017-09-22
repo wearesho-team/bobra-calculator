@@ -4,7 +4,7 @@ import * as PropTypes from "prop-types";
 import { CalculatorControlWrapperProps } from "./CalculatorControlWrapperProps";
 import { CalculatorControlWrapperContext } from "./CalculatorControlWrapperContext";
 import { CalculatorContext } from "../Calculator/CalculatorContext";
-export declare class CalculatorControlWrapper extends React.Component<CalculatorControlWrapperProps, void> {
+export declare class CalculatorControlWrapper extends React.Component<CalculatorControlWrapperProps> {
     static readonly propTypes: {
         type: PropTypes.Validator<any>;
         children: PropTypes.Validator<any>;

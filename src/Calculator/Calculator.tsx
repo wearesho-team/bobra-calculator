@@ -14,14 +14,20 @@ export class Calculator extends React.Component<CalculatorProps, any> {
 
     public state: CalculatorState;
 
+    protected initialAmount: number;
+    protected initialTerm: number;
+
     public constructor(props: CalculatorProps) {
         super(props);
 
+        this.initialAmount = (props.amount.initial || Math.round((props.amount.min + props.amount.max) / 2));
+        this.initialTerm = (!!props.term
+            ? props.term.initial || Math.round((props.term.min + props.term.max) / 2)
+            : 0);
+
         this.state = {
-            amount: props.amount.initial || Math.round((props.amount.min + props.amount.max) / 2),
-            term: (!!props.term
-                ? props.term.initial || Math.round((props.term.min + props.term.max) / 2)
-                : 0)
+            amount: this.initialAmount,
+            term: this.initialTerm,
         };
     }
 
@@ -30,7 +36,8 @@ export class Calculator extends React.Component<CalculatorProps, any> {
             max: this.props.term.max,
             min: this.props.term.min,
             step: this.props.term.step || 1,
-        }) || {max: 0, min: 0, step: 1};
+            initial: this.initialTerm,
+        }) || {max: 0, min: 0, step: 1, initial: 0};
 
         return {
             Conditions: {
@@ -39,6 +46,7 @@ export class Calculator extends React.Component<CalculatorProps, any> {
                     min: this.props.amount.min,
                     max: this.props.amount.max,
                     step: 50,
+                    initial: this.initialAmount,
                 },
             },
 
@@ -69,14 +77,16 @@ export class Calculator extends React.Component<CalculatorProps, any> {
         return this.props.children;
     }
 
-    protected handleAmountChange(nextAmount: number): void {
+    protected handleAmountChange = (nextAmount: number): number => {
         nextAmount = Math.max(this.props.amount.min, nextAmount);
         nextAmount = Math.min(this.props.amount.max, nextAmount);
 
         this.setState({amount: nextAmount});
-    }
 
-    protected handleTermChange(nextTerm: number): void {
+        return nextAmount;
+    };
+
+    protected handleTermChange = (nextTerm: number): number => {
         if (this.props.term === undefined) {
             return;
         }
@@ -85,5 +95,6 @@ export class Calculator extends React.Component<CalculatorProps, any> {
         nextTerm = Math.min(this.props.term.max, nextTerm);
 
         this.setState({term: nextTerm});
-    }
+        return nextTerm;
+    };
 }

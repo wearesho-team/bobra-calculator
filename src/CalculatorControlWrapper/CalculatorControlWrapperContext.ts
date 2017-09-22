@@ -8,7 +8,7 @@ export interface CalculatorControlWrapperContext {
     },
     calculationValue: number,
 
-    onCalculationChange: (nextValue: number) => void,
+    onCalculationChange: (delta: number) => number,
 }
 
 export const CalculatorControlWrapperContextTypes = {

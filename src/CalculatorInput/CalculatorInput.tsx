@@ -22,17 +22,9 @@ export class CalculatorInput extends React.Component<React.HTMLProps<HTMLInputEl
     }
 
     protected handleBlur = (event: React.FormEvent<HTMLInputElement>) => {
-        const nextValue: number = Number(event.currentTarget.value);
-        if (nextValue > this.context.Conditions.max || nextValue < this.context.Conditions.min) {
-            event.currentTarget.value = this.context.calculationValue.toString();
-            return;
-        }
-
-        if (nextValue === this.context.Conditions.max) {
-            this.context.onCalculationChange(nextValue);
-        }
-
-        this.context.onCalculationChange(nextValue - ((nextValue - this.context.Conditions.min) % 25));
+        let nextValue: number = Number(event.currentTarget.value);
+        nextValue = this.context.onCalculationChange(nextValue - ((nextValue - this.context.Conditions.min) % 25));
+        event.currentTarget.value = nextValue.toString();
     };
 
     protected handleInput = (event: React.FormEvent<HTMLInputElement>) => {

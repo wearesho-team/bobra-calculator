@@ -11,6 +11,6 @@ export interface CalculatorControlWrapperProps {
 }
 
 export const CalculatorControlWrapperPropTypes = {
-    type: PropTypes.oneOf(Object.keys(CalculatorControlTypes)).isRequired,
+    type: PropTypes.oneOf(Object.values(CalculatorControlTypes)).isRequired,
     children: PropTypes.element.isRequired,
 };

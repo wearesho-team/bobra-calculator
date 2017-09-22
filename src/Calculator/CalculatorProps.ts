@@ -36,8 +36,8 @@ export const CalculatorPropTypes = {
         step: PropTypes.number,
     }),
 
-    onAmountChange: PropTypes.func.isRequired,
-    onTermChange: PropTypes.func.isRequired,
+    onAmountChange: PropTypes.func,
+    onTermChange: PropTypes.func,
 
     children: PropTypes.element.isRequired,
 };
