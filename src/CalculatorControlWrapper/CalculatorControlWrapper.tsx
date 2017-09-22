@@ -9,10 +9,10 @@ import {
 import {CalculatorControlWrapperContext, CalculatorControlWrapperContextTypes} from "./CalculatorControlWrapperContext";
 import {CalculatorContext, CalculatorContextTypes} from "../Calculator/CalculatorContext";
 
-export class CalculatorControlWrapper extends React.Component<CalculatorControlWrapperProps, void> {
+export class CalculatorControlWrapper extends React.Component<CalculatorControlWrapperProps> {
     public static readonly propTypes = CalculatorControlWrapperPropTypes;
     public static readonly contextTypes = CalculatorContextTypes;
-    public static readonly childContextTypes = CalculatorControlWrapperContextTypes
+    public static readonly childContextTypes = CalculatorControlWrapperContextTypes;
 
     public readonly context: CalculatorContext;
 
