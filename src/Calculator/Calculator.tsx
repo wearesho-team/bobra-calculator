@@ -43,14 +43,22 @@ export class Calculator extends React.Component<CalculatorProps, any> {
             },
 
             Credit: {
-                term: this.state.term,
-                amount: this.state.amount,
+                term: this.term,
+                amount: this.amount,
                 interest: this.interest,
             },
 
             onAmountChange: this.handleAmountChange,
             onTermChange: this.handleTermChange,
         };
+    }
+
+    public get term(): number {
+        return this.state.term;
+    }
+
+    public get amount(): number {
+        return this.state.amount;
     }
 
     public get interest(): number {
