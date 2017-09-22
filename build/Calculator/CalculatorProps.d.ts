@@ -22,7 +22,7 @@ export declare const CalculatorPropTypes: {
     interest: PropTypes.Validator<any>;
     amount: PropTypes.Validator<any>;
     term: PropTypes.Requireable<any>;
-    onAmountChange: PropTypes.Validator<any>;
-    onTermChange: PropTypes.Validator<any>;
+    onAmountChange: PropTypes.Requireable<any>;
+    onTermChange: PropTypes.Requireable<any>;
     children: PropTypes.Validator<any>;
 };

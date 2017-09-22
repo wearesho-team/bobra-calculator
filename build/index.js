@@ -112,9 +112,26 @@ var Calculator = exports.Calculator = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Calculator.__proto__ || Object.getPrototypeOf(Calculator)).call(this, props));
 
+        _this.handleAmountChange = function (nextAmount) {
+            nextAmount = Math.max(_this.props.amount.min, nextAmount);
+            nextAmount = Math.min(_this.props.amount.max, nextAmount);
+            _this.setState({ amount: nextAmount });
+            return nextAmount;
+        };
+        _this.handleTermChange = function (nextTerm) {
+            if (_this.props.term === undefined) {
+                return;
+            }
+            nextTerm = Math.max(_this.props.term.min, nextTerm);
+            nextTerm = Math.min(_this.props.term.max, nextTerm);
+            _this.setState({ term: nextTerm });
+            return nextTerm;
+        };
+        _this.initialAmount = props.amount.initial || Math.round((props.amount.min + props.amount.max) / 2);
+        _this.initialTerm = !!props.term ? props.term.initial || Math.round((props.term.min + props.term.max) / 2) : 0;
         _this.state = {
-            amount: props.amount.initial || Math.round((props.amount.min + props.amount.max) / 2),
-            term: !!props.term ? props.term.initial || Math.round((props.term.min + props.term.max) / 2) : 0
+            amount: _this.initialAmount,
+            term: _this.initialTerm
         };
         return _this;
     }
@@ -125,15 +142,17 @@ var Calculator = exports.Calculator = function (_React$Component) {
             var term = this.props.term && {
                 max: this.props.term.max,
                 min: this.props.term.min,
-                step: this.props.term.step || 1
-            } || { max: 0, min: 0, step: 1 };
+                step: this.props.term.step || 1,
+                initial: this.initialTerm
+            } || { max: 0, min: 0, step: 1, initial: 0 };
             return {
                 Conditions: {
                     Term: term,
                     Amount: {
                         min: this.props.amount.min,
                         max: this.props.amount.max,
-                        step: 50
+                        step: 50,
+                        initial: this.initialAmount
                     }
                 },
                 Credit: {
@@ -149,23 +168,6 @@ var Calculator = exports.Calculator = function (_React$Component) {
         key: "render",
         value: function render() {
             return this.props.children;
-        }
-    }, {
-        key: "handleAmountChange",
-        value: function handleAmountChange(nextAmount) {
-            nextAmount = Math.max(this.props.amount.min, nextAmount);
-            nextAmount = Math.min(this.props.amount.max, nextAmount);
-            this.setState({ amount: nextAmount });
-        }
-    }, {
-        key: "handleTermChange",
-        value: function handleTermChange(nextTerm) {
-            if (this.props.term === undefined) {
-                return;
-            }
-            nextTerm = Math.max(this.props.term.min, nextTerm);
-            nextTerm = Math.min(this.props.term.max, nextTerm);
-            this.setState({ term: nextTerm });
         }
     }, {
         key: "term",
@@ -266,8 +268,8 @@ var CalculatorPropTypes = exports.CalculatorPropTypes = {
         initial: PropTypes.number,
         step: PropTypes.number
     }),
-    onAmountChange: PropTypes.func.isRequired,
-    onTermChange: PropTypes.func.isRequired,
+    onAmountChange: PropTypes.func,
+    onTermChange: PropTypes.func,
     children: PropTypes.element.isRequired
 };
 
@@ -578,7 +580,7 @@ var CalculatorControlTypes = exports.CalculatorControlTypes = undefined;
     CalculatorControlTypes["amount"] = "Amount";
 })(CalculatorControlTypes || (exports.CalculatorControlTypes = CalculatorControlTypes = {}));
 var CalculatorControlWrapperPropTypes = exports.CalculatorControlWrapperPropTypes = {
-    type: PropTypes.oneOf(Object.keys(CalculatorControlTypes)).isRequired,
+    type: PropTypes.oneOf(Object.values(CalculatorControlTypes)).isRequired,
     children: PropTypes.element.isRequired
 };
 
@@ -669,14 +671,8 @@ var CalculatorInput = exports.CalculatorInput = function (_React$Component) {
 
         _this.handleBlur = function (event) {
             var nextValue = Number(event.currentTarget.value);
-            if (nextValue > _this.context.Conditions.max || nextValue < _this.context.Conditions.min) {
-                event.currentTarget.value = _this.context.calculationValue.toString();
-                return;
-            }
-            if (nextValue === _this.context.Conditions.max) {
-                _this.context.onCalculationChange(nextValue);
-            }
-            _this.context.onCalculationChange(nextValue - (nextValue - _this.context.Conditions.min) % 25);
+            nextValue = _this.context.onCalculationChange(nextValue - (nextValue - _this.context.Conditions.min) % 25);
+            event.currentTarget.value = nextValue.toString();
         };
         _this.handleInput = function (event) {
             if (event.currentTarget.value.match(/\D/)) {
@@ -691,9 +687,14 @@ var CalculatorInput = exports.CalculatorInput = function (_React$Component) {
     }
 
     _createClass(CalculatorInput, [{
+        key: "componentDidUpdate",
+        value: function componentDidUpdate() {
+            this.input.value = this.context.calculationValue.toString();
+        }
+    }, {
         key: "render",
         value: function render() {
-            return React.createElement("input", Object.assign({}, this.props.children, { ref: this.inputRef, onInput: this.handleInput, onBlur: this.handleBlur }));
+            return React.createElement("input", Object.assign({}, this.props, { ref: this.inputRef, defaultValue: this.context.Conditions.initial.toString(), onInput: this.handleInput, onBlur: this.handleBlur }));
         }
     }]);
 

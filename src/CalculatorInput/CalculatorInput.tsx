@@ -11,11 +11,16 @@ export class CalculatorInput extends React.Component<React.HTMLProps<HTMLInputEl
     public readonly context: CalculatorControlWrapperContext;
     protected input: HTMLInputElement;
 
+    public componentDidUpdate() {
+        this.input.value = this.context.calculationValue.toString();
+    }
+
     public render(): JSX.Element {
         return (
             <input
-                {...this.props.children}
+                {...this.props}
                 ref={this.inputRef}
+                defaultValue={this.context.Conditions.initial.toString()}
                 onInput={this.handleInput} onBlur={this.handleBlur}
             />
         )

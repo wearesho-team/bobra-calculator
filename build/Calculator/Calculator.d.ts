@@ -12,8 +12,8 @@ export declare class Calculator extends React.Component<CalculatorProps, any> {
         interest: PropTypes.Validator<any>;
         amount: PropTypes.Validator<any>;
         term: PropTypes.Requireable<any>;
-        onAmountChange: PropTypes.Validator<any>;
-        onTermChange: PropTypes.Validator<any>;
+        onAmountChange: PropTypes.Requireable<any>;
+        onTermChange: PropTypes.Requireable<any>;
         children: PropTypes.Validator<any>;
     };
     static readonly childContextTypes: {
@@ -23,12 +23,14 @@ export declare class Calculator extends React.Component<CalculatorProps, any> {
         onTermChange: PropTypes.Validator<any>;
     };
     state: CalculatorState;
+    protected initialAmount: number;
+    protected initialTerm: number;
     constructor(props: CalculatorProps);
     getChildContext(): CalculatorContext;
     readonly term: number;
     readonly amount: number;
     readonly interest: number;
     render(): JSX.Element;
-    protected handleAmountChange(nextAmount: number): void;
-    protected handleTermChange(nextTerm: number): void;
+    protected handleAmountChange: (nextAmount: number) => number;
+    protected handleTermChange: (nextTerm: number) => number;
 }

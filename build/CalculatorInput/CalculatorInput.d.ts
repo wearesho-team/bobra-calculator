@@ -10,6 +10,7 @@ export declare class CalculatorInput extends React.Component<React.HTMLProps<HTM
     };
     readonly context: CalculatorControlWrapperContext;
     protected input: HTMLInputElement;
+    componentDidUpdate(): void;
     render(): JSX.Element;
     protected handleBlur: (event: React.FormEvent<HTMLInputElement>) => void;
     protected handleInput: (event: React.FormEvent<HTMLInputElement>) => void;

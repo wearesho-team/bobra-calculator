@@ -5,6 +5,7 @@ export interface CalculatorControlWrapperContext {
         min: number,
         max: number,
         step: number,
+        initial: number,
     },
     calculationValue: number,
 

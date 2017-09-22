@@ -23,5 +23,5 @@ export declare class CalculatorControlWrapper extends React.Component<Calculator
     readonly context: CalculatorContext;
     getChildContext(): CalculatorControlWrapperContext;
     render(): JSX.Element;
-    protected readonly handleCalculationChange: (nextAmount: number) => void;
+    protected readonly handleCalculationChange: ((nextAmount: number) => number) | (() => any);
 }
