@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("prop-types"), require("react"));
+		module.exports = factory(require("prop-types"), require("react"), require("rc-slider"));
 	else if(typeof define === 'function' && define.amd)
-		define(["prop-types", "react"], factory);
+		define(["prop-types", "react", "rc-slider"], factory);
 	else if(typeof exports === 'object')
-		exports["bobra-calculator"] = factory(require("prop-types"), require("react"));
+		exports["bobra-calculator"] = factory(require("prop-types"), require("react"), require("rc-slider"));
 	else
-		root["bobra-calculator"] = factory(root["prop-types"], root["react"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_prop_types__, __WEBPACK_EXTERNAL_MODULE_react__) {
+		root["bobra-calculator"] = factory(root["prop-types"], root["react"], root["rc-slider"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_prop_types__, __WEBPACK_EXTERNAL_MODULE_react__, __WEBPACK_EXTERNAL_MODULE_rc_slider__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -915,6 +915,86 @@ Object.keys(_CalculatorLabelProps).forEach(function (key) {
 
 /***/ }),
 
+/***/ "./src/CalculatorSlider/CalculatorSlider.tsx":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.CalculatorSlider = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__("react");
+
+var React = _interopRequireWildcard(_react);
+
+var _CalculatorControlWrapperContext = __webpack_require__("./src/CalculatorControlWrapper/CalculatorControlWrapperContext.ts");
+
+var _rcSlider = __webpack_require__("rc-slider");
+
+var _rcSlider2 = _interopRequireDefault(_rcSlider);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CalculatorSlider = exports.CalculatorSlider = function (_React$Component) {
+    _inherits(CalculatorSlider, _React$Component);
+
+    function CalculatorSlider() {
+        _classCallCheck(this, CalculatorSlider);
+
+        return _possibleConstructorReturn(this, (CalculatorSlider.__proto__ || Object.getPrototypeOf(CalculatorSlider)).apply(this, arguments));
+    }
+
+    _createClass(CalculatorSlider, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(_rcSlider2.default, { value: this.context.calculationValue, min: this.context.Conditions.min, max: this.context.Conditions.max, step: this.context.Conditions.step, onChange: this.context.onCalculationChange });
+        }
+    }]);
+
+    return CalculatorSlider;
+}(React.Component);
+
+CalculatorSlider.contextTypes = _CalculatorControlWrapperContext.CalculatorControlWrapperContextTypes;
+
+/***/ }),
+
+/***/ "./src/CalculatorSlider/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _CalculatorSlider = __webpack_require__("./src/CalculatorSlider/CalculatorSlider.tsx");
+
+Object.keys(_CalculatorSlider).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _CalculatorSlider[key];
+    }
+  });
+});
+
+/***/ }),
+
 /***/ "./src/index.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -985,6 +1065,18 @@ Object.keys(_CalculatorControlWrapper).forEach(function (key) {
   });
 });
 
+var _CalculatorSlider = __webpack_require__("./src/CalculatorSlider/index.ts");
+
+Object.keys(_CalculatorSlider).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _CalculatorSlider[key];
+    }
+  });
+});
+
 /***/ }),
 
 /***/ 0:
@@ -999,6 +1091,13 @@ module.exports = __webpack_require__("./src/index.ts");
 /***/ (function(module, exports) {
 
 module.exports = require("prop-types");
+
+/***/ }),
+
+/***/ "rc-slider":
+/***/ (function(module, exports) {
+
+module.exports = require("rc-slider");
 
 /***/ }),
 

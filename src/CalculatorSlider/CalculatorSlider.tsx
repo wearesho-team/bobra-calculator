@@ -1,9 +1,10 @@
 import * as React from "react";
 import * as PropTypes from "prop-types";
 import {
-    CalculatorControlWrapper, CalculatorControlWrapperContext,
-    CalculatorControlWrapperContextTypes
-} from "..";
+    CalculatorControlWrapperContextTypes,
+    CalculatorControlWrapperContext,
+} from "../CalculatorControlWrapper/CalculatorControlWrapperContext";
+
 import Slider from "rc-slider";
 
 export class CalculatorSlider extends React.Component {
