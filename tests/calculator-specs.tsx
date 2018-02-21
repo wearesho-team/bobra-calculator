@@ -23,5 +23,4 @@ describe("<Calculator />", () => {
         expect(node.amount).to.equal(550);
     });
 
-    it("should count interest using formula amount * term * integes")
 });
