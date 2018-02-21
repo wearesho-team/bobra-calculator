@@ -1,6 +1,6 @@
 {
   "name": "react-credit-calculator",
-  "version": "1.0.0-rc1",
+  "version": "1.0.0-rc1.0",
   "description": "Credit calculator based on rc-slider",
   "main": "build/index.js",
   "typings": "build/index.d.ts",
@@ -10,7 +10,7 @@
     "dev": "./node_modules/.bin/webpack-dev-server",
     "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "lint": "./node_modules/.bin/tslint --project . --exclude ./node_modules/* --exclude ./build/**.ts",
-    "prepublishOnly": "npm test && npm run build"
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -84,7 +84,6 @@
     "report-dir": "./tests/output"
   },
   "pre-commit": [
-    "lint",
-    "test"
+    "lint"
   ]
 }
