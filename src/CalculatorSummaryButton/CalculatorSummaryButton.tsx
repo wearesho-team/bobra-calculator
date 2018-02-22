@@ -16,19 +16,21 @@ export const CalculatorSummaryButtonPropTypes:
     };
 
 export class CalculatorSummaryButton extends React.Component<CalculatorSummaryButtonProps> {
-    public static readonly contextTypes = CalculatorContextTypes;    
+    public static readonly contextTypes = CalculatorContextTypes;
     public static readonly propTypes = CalculatorSummaryButtonPropTypes;
 
     public readonly context: CalculatorContext;
 
     public render(): JSX.Element {
+        const { onSummary, children, ...childProps } = this.props;
+
         return (
             <button
                 type="button"
-                {...this.props}
+                {...childProps}
                 onClick={this.handleClick}
             >
-                {this.props.children}
+                {children}
             </button>
         );
     }
