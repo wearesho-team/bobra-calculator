@@ -27,9 +27,7 @@ export class CalculatorInput extends React.Component<React.HTMLProps<HTMLInputEl
     }
 
     protected handleBlur = (event: React.FormEvent<HTMLInputElement>) => {
-        let nextValue: number = Number(event.currentTarget.value);
-        nextValue = this.context.onCalculationChange(nextValue - ((nextValue - this.context.Conditions.min) % 25));
-        event.currentTarget.value = nextValue.toString();
+        this.context.onCalculationChange(Number(event.currentTarget.value));
     };
 
     protected handleInput = (event: React.FormEvent<HTMLInputElement>) => {
