@@ -1,6 +1,6 @@
 {
   "name": "react-credit-calculator",
-  "version": "1.0.0-rc1.1",
+  "version": "1.0.0-rc1.2",
   "description": "Credit calculator based on rc-slider",
   "main": "build/index.js",
   "typings": "build/index.d.ts",
