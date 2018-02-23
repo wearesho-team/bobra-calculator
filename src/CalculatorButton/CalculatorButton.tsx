@@ -13,8 +13,9 @@ export class CalculatorButton extends React.Component<CalculatorButtonProps, und
     public readonly context: CalculatorControlWrapperContext;
 
     public get isDisabled(): boolean {
-        return this.context.calculationValue >= this.context.Conditions.max
-            || this.context.calculationValue <= this.context.Conditions.min;
+        return this.props.increase
+            ? this.context.calculationValue >= this.context.Conditions.max
+            : this.context.calculationValue <= this.context.Conditions.min;
     }
 
     public render(): JSX.Element {

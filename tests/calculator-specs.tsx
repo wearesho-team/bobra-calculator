@@ -15,7 +15,7 @@ describe("<Calculator />", () => {
                 <span>Calculator</span>
             </Calculator>
         );
-        node = wrapper.getNode() as any;
+        node = wrapper.instance() as any;
     });
 
     it("should take average of min and max for initial value (amount, term)", () => {
