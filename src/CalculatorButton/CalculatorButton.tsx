@@ -19,8 +19,9 @@ export class CalculatorButton extends React.Component<CalculatorButtonProps, und
     }
 
     public render(): JSX.Element {
+        const { increase, ...props } = this.props;
         return (
-            <button {...this.props} disabled={this.isDisabled} onClick={this.handleClick}>
+            <button {...props} disabled={this.isDisabled} onClick={this.handleClick}>
                 {this.props.children}
             </button>
         );

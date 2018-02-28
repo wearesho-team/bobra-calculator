@@ -17,8 +17,6 @@ export interface CalculatorProps {
 
     onAmountChange?: (nextAmount: number) => void,
     onTermChange?: (nextTerm: number) => void,
-
-    children: JSX.Element,
 }
 
 export const CalculatorPropTypes = {
@@ -38,6 +36,4 @@ export const CalculatorPropTypes = {
 
     onAmountChange: PropTypes.func,
     onTermChange: PropTypes.func,
-
-    children: PropTypes.element.isRequired,
 };
