@@ -73,7 +73,7 @@ export class Calculator extends React.Component<CalculatorProps, any> {
         return Math.round(this.state.term * this.props.interest * this.state.amount);
     }
 
-    public render(): JSX.Element {
+    public render() {
         return this.props.children;
     }
 
