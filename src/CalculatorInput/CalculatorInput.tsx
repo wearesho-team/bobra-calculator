@@ -5,7 +5,7 @@ import {
     CalculatorControlWrapperContextTypes
 } from "../CalculatorControlWrapper/CalculatorControlWrapperContext";
 
-export class CalculatorInput extends React.Component<React.HTMLProps<HTMLInputElement>, undefined> {
+export class CalculatorInput extends React.Component<React.HTMLProps<HTMLInputElement>> {
     public static readonly contextTypes = CalculatorControlWrapperContextTypes;
 
     public readonly context: CalculatorControlWrapperContext;
