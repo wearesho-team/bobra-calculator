@@ -5,7 +5,7 @@ export enum CalculatorLabelTypes {
     term = "term",
     total = "total",
     amount = "amount",
-    interest = "interest",    
+    interest = "interest",
     termDeadline = "termDeadline"
 }
 
