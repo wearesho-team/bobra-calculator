@@ -6,15 +6,15 @@ export enum CalculatorLabelTypes {
     total = "total",
     amount = "amount",
     interest = "interest",
-    termDeadline = "termDeadline"
+    returnDate = "returnDate"
 }
 
 export interface CalculatorLabelProps extends React.HTMLProps<HTMLSpanElement> {
     labelType: CalculatorLabelTypes;
-    termDeadlineFormat?: (date: Date) => string;
+    returnDateFormat?: (date: Date) => string;
 }
 
 export const CalculatorLabelPropTypes = {
     labelType: PropTypes.oneOf(Object.keys(CalculatorLabelTypes)),
-    termDeadlineFormat: PropTypes.func
+    returnDateFormat: PropTypes.func
 };

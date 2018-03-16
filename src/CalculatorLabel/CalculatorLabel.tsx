@@ -10,7 +10,7 @@ export class CalculatorLabel extends React.Component<CalculatorLabelProps> {
     public readonly context: CalculatorLabelContext;
 
     public render(): JSX.Element {
-        const { labelType, termDeadlineFormat, ...childContext } = this.props;
+        const { labelType, returnDateFormat, ...childContext } = this.props;
         return <span {...childContext}>{this.children}</span>;
     }
 
@@ -24,16 +24,16 @@ export class CalculatorLabel extends React.Component<CalculatorLabelProps> {
                 return this.context.Credit.term;
             case CalculatorLabelTypes.total:
                 return Math.round(this.context.Credit.amount + this.context.Credit.interest);
-            case CalculatorLabelTypes.termDeadline:
-                return this.props.termDeadlineFormat
-                    ? this.props.termDeadlineFormat(this.deadline)
+            case CalculatorLabelTypes.returnDate:
+                return this.props.returnDateFormat
+                    ? this.props.returnDateFormat(this.returnDate)
                     : this.context.Credit.term;
             default:
                 return 0;
         }
     }
 
-    protected get deadline(): Date {
+    protected get returnDate(): Date {
         const currentDate = new Date();
         currentDate.setDate(currentDate.getDate() + this.context.Credit.term);
 

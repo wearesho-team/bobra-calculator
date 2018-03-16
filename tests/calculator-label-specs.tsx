@@ -40,7 +40,7 @@ describe("<CalculatorLabel />", () => {
         expect(wrapper.getDOMNode().innerHTML).to.equal("20");
 
         wrapper.setProps({
-            labelType: CalculatorLabelTypes.termDeadline,
+            labelType: CalculatorLabelTypes.returnDate,
         });
         expect(wrapper.getDOMNode().innerHTML).to.equal("20");
 
@@ -51,7 +51,7 @@ describe("<CalculatorLabel />", () => {
             return "date";
         };
         wrapper.setProps({
-            termDeadlineFormat: handleFormat
+            returnDateFormat: handleFormat
         });
         expect(formatted).to.be.true;
         expect(wrapper.getDOMNode().innerHTML).to.equal("date");
