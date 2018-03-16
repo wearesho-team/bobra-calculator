@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import {CalculatorLabelProps, CalculatorLabelPropTypes, CalculatorLabelTypes} from "./CalculatorLabelProps";
 import {CalculatorLabelContext, CalculatorLabelContextTypes} from "./CalculatorLabelContext";
 
-export class CalculatorLabel extends React.Component<CalculatorLabelProps, undefined> {
+export class CalculatorLabel extends React.Component<CalculatorLabelProps> {
     public static readonly propTypes = CalculatorLabelPropTypes;
     public static readonly contextTypes = CalculatorLabelContextTypes;
 

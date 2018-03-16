@@ -8,7 +8,7 @@ export interface CalculatorState {
     amount: number,
 }
 
-export class Calculator extends React.Component<CalculatorProps, any> {
+export class Calculator extends React.Component<CalculatorProps> {
     public static readonly propTypes = CalculatorPropTypes;
     public static readonly childContextTypes = CalculatorContextTypes;
 
