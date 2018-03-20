@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import {expect} from "chai";
-import {mount, ReactWrapper} from "enzyme";
-import {CalculatorLabel, CalculatorLabelProps, CalculatorLabelTypes} from "../src";
+import { expect } from "chai";
+import { mount, ReactWrapper } from "enzyme";
+import { CalculatorLabel, CalculatorLabelProps, CalculatorLabelTypes } from "../src";
 
 describe("<CalculatorLabel />", () => {
     const context = {
@@ -15,7 +15,7 @@ describe("<CalculatorLabel />", () => {
 
     let wrapper: ReactWrapper<CalculatorLabelProps>;
     beforeEach(() => {
-        wrapper = mount(<CalculatorLabel labelType={CalculatorLabelTypes.total}/>, {context});
+        wrapper = mount(<CalculatorLabel labelType={CalculatorLabelTypes.total} />, { context });
     });
 
     it("Should render children depends on labelType prop", () => {
@@ -38,5 +38,22 @@ describe("<CalculatorLabel />", () => {
             labelType: CalculatorLabelTypes.term,
         });
         expect(wrapper.getDOMNode().innerHTML).to.equal("20");
+
+        wrapper.setProps({
+            labelType: CalculatorLabelTypes.returnDate,
+        });
+        expect(wrapper.getDOMNode().innerHTML).to.equal("20");
+
+
+        let formatted = false;
+        const handleFormat = (date: Date) => {
+            formatted = true;
+            return "date";
+        };
+        wrapper.setProps({
+            returnDateFormat: handleFormat
+        });
+        expect(formatted).to.be.true;
+        expect(wrapper.getDOMNode().innerHTML).to.equal("date");
     })
 });
