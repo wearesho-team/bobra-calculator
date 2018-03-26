@@ -5,9 +5,9 @@ import {
     CalculatorControlWrapperContext,
 } from "../CalculatorControlWrapper/CalculatorControlWrapperContext";
 
-import Slider from "rc-slider";
+import Slider, { SliderProps } from "rc-slider";
 
-export class CalculatorSlider extends React.Component {
+export class CalculatorSlider extends React.Component<SliderProps> {
     public static readonly contextTypes = CalculatorControlWrapperContextTypes;
 
     public context: CalculatorControlWrapperContext;
@@ -15,6 +15,7 @@ export class CalculatorSlider extends React.Component {
     public render(): JSX.Element {
         return (
             <Slider
+                {...this.props}
                 value={this.context.calculationValue}
                 min={this.context.Conditions.min}
                 max={this.context.Conditions.max}
