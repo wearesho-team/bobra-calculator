@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { CalculatorContext, CalculatorContextValue } from "./CalculatorContext";
 
-export enum CalculatorLabelTypes {
+export enum CalculatorLabelType {
     term = "term",
     total = "total",
     amount = "amount",
@@ -10,18 +10,18 @@ export enum CalculatorLabelTypes {
 }
 
 export interface CalculatorLabelProps extends React.HTMLProps<HTMLSpanElement> {
-    labelType: CalculatorLabelTypes;
+    labelType: CalculatorLabelType;
 }
 
-function getLabelChildren(labelType: CalculatorLabelTypes, value: CalculatorContextValue): string | number {
+function getLabelChildren(labelType: CalculatorLabelType, value: CalculatorContextValue): string | number {
     switch (labelType) {
-        case CalculatorLabelTypes.amount:
+        case CalculatorLabelType.amount:
             return value.amount.value;
-        case CalculatorLabelTypes.interest:
+        case CalculatorLabelType.interest:
             return value.interest.amount;
-        case CalculatorLabelTypes.term:
+        case CalculatorLabelType.term:
             return value.term.value;
-        case CalculatorLabelTypes.total:
+        case CalculatorLabelType.total:
             return Math.round(value.amount.value + value.interest.amount);
     }
 }
