@@ -8,3 +8,4 @@ export * from "./CalculatorInput";
 export * from "./CalculatorLabel";
 export * from "./CalculatorSlider";
 export * from "./CalculatorSummaryButton";
+export * from "./PromocodeInput";

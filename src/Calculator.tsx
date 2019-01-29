@@ -4,6 +4,11 @@ import { CalculatorContext, CalculatorContextValue } from "./CalculatorContext";
 export interface CalculatorState {
     term: number,
     amount: number,
+    promocode: {
+        value: string;
+        isValid?: boolean;
+        discount?: number;
+    };
 }
 
 export interface CalculatorProps {
@@ -20,6 +25,7 @@ export interface CalculatorProps {
         initial?: number,
         step?: number,
     },
+    promocode?: string;
 
     onAmountChange?: (nextAmount: number) => void,
     onTermChange?: (nextTerm: number) => void,
@@ -29,12 +35,19 @@ export class Calculator extends React.PureComponent<CalculatorProps, CalculatorS
     public readonly state: CalculatorState = {
         term: this.props.term.initial || Math.round((this.props.term.min + this.props.term.max) / 2),
         amount: this.props.amount.initial || Math.round((this.props.amount.min + this.props.amount.max) / 2),
+        promocode: { value: this.props.promocode || "" }
     };
 
     public get interest(): { amount: number, rate: number } {
+        let rate = this.props.interestRate;
+
+        if (this.state.promocode.discount) {
+            rate = rate - rate * this.state.promocode.discount;
+        }
+
         return {
-            amount: Math.round(this.state.term * this.props.interestRate * this.state.amount),
-            rate: this.props.interestRate,
+            amount: Math.round(this.state.term * rate * this.state.amount),
+            rate,
         };
     }
 
@@ -53,12 +66,17 @@ export class Calculator extends React.PureComponent<CalculatorProps, CalculatorS
             },
             term: {
                 value: this.state.term,
-                min: this.props.amount.min,
-                max: this.props.amount.max,
-                step: this.props.amount.step,
+                min: this.props.term.min,
+                max: this.props.term.max,
+                step: this.props.term.step,
                 onChange: this.handleTermChange,
             },
             interest: this.interest,
+            promocode: {
+                ...this.state.promocode,
+                onChange: this.handlePromocodeChange,
+                onValidate: this.handlePromocodeValidate,
+            }
         };
     }
 
@@ -82,4 +100,20 @@ export class Calculator extends React.PureComponent<CalculatorProps, CalculatorS
         this.setState({ term: nextTerm });
         return nextTerm;
     };
+
+    protected handlePromocodeChange = (promocode: string) => {
+        this.setState({
+            promocode: {
+                value: promocode,
+                isValid: undefined,
+                discount: undefined,
+            },
+        });
+    };
+
+    protected handlePromocodeValidate = (discount?: number) => {
+        this.state.promocode.discount = discount;
+        this.state.promocode.isValid = !!this.state.promocode.value ? !!discount : undefined;
+        this.forceUpdate();
+    }
 }
