@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { CalculatorContext, CalculatorContextValue } from "./CalculatorContext";
 
-export interface CalculatorDateLabelProps {
+export interface CalculatorDateLabelProps extends React.HTMLProps<HTMLSpanElement> {
     format?: (date: Date) => string,
 }
 
