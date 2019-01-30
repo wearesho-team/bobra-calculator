@@ -4,10 +4,9 @@ import { CalculatorContext, CalculatorContextValue } from "./CalculatorContext";
 export interface CalculatorState {
     term: number,
     amount: number,
-    promocode: {
+    promocode?: {
         value: string;
-        isValid?: boolean;
-        discount?: number;
+        discount: number;
     };
 }
 
@@ -35,13 +34,18 @@ export class Calculator extends React.PureComponent<CalculatorProps, CalculatorS
     public readonly state: CalculatorState = {
         term: this.props.term.initial || Math.round((this.props.term.min + this.props.term.max) / 2),
         amount: this.props.amount.initial || Math.round((this.props.amount.min + this.props.amount.max) / 2),
-        promocode: { value: this.props.promocode || "" }
+        promocode: this.props.promocode
+            ? {
+                value: this.props.promocode,
+                discount: 0,
+            }
+            : undefined
     };
 
     public get interest(): { amount: number, rate: number } {
         let rate = this.props.interestRate;
 
-        if (this.state.promocode.discount) {
+        if (this.state.promocode) {
             rate = rate - rate * this.state.promocode.discount;
         }
 
@@ -75,7 +79,6 @@ export class Calculator extends React.PureComponent<CalculatorProps, CalculatorS
             promocode: {
                 ...this.state.promocode,
                 onChange: this.handlePromocodeChange,
-                onValidate: this.handlePromocodeValidate,
             }
         };
     }
@@ -101,19 +104,7 @@ export class Calculator extends React.PureComponent<CalculatorProps, CalculatorS
         return nextTerm;
     };
 
-    protected handlePromocodeChange = (promocode: string) => {
-        this.setState({
-            promocode: {
-                value: promocode,
-                isValid: undefined,
-                discount: undefined,
-            },
-        });
+    protected handlePromocodeChange = (promocode?: { value: string; discount: number }) => {
+        this.setState({ promocode });
     };
-
-    protected handlePromocodeValidate = (discount?: number) => {
-        this.state.promocode.discount = discount;
-        this.state.promocode.isValid = !!this.state.promocode.value ? !!discount : undefined;
-        this.forceUpdate();
-    }
 }

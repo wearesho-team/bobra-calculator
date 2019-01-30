@@ -20,11 +20,9 @@ export interface CalculatorContextValue {
         amount: number;
     };
     promocode: {
-        value: string;
+        value?: string;
         discount?: number;
-        isValid?: boolean;
-        onChange: (next: string) => void;
-        onValidate: (discount?: number) => void;
+        onChange: (promocode?: { value: string; discount: number }) => void;
     }
 }
 
@@ -50,7 +48,6 @@ export const CalculatorContextDefaultValue: CalculatorContextValue = {
     promocode: {
         value: "",
         onChange: () => undefined,
-        onValidate: () => undefined,
     }
 };
 

@@ -26,7 +26,6 @@ describe("<CalculatorLabel />", () => {
         promocode: {
             value: "",
             onChange: () => undefined,
-            onValidate: () => undefined,
         }
     };
 
