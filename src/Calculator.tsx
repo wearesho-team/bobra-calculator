@@ -76,10 +76,8 @@ export class Calculator extends React.PureComponent<CalculatorProps, CalculatorS
                 onChange: this.handleTermChange,
             },
             interest: this.interest,
-            promocode: {
-                ...this.state.promocode,
-                onChange: this.handlePromocodeChange,
-            }
+            promocode: this.state.promocode,
+            onPromocodeChange: this.handlePromocodeChange,
         };
     }
 

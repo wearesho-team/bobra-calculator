@@ -19,11 +19,11 @@ export interface CalculatorContextValue {
         rate: number,
         amount: number;
     };
-    promocode: {
-        value?: string;
-        discount?: number;
-        onChange: (promocode?: { value: string; discount: number }) => void;
+    promocode?: {
+        value: string;
+        discount: number;
     }
+    onPromocodeChange: (promocode?: { value: string; discount: number }) => void;
 }
 
 export const CalculatorContextDefaultValue: CalculatorContextValue = {
@@ -45,10 +45,7 @@ export const CalculatorContextDefaultValue: CalculatorContextValue = {
         rate: 0.0175,
         amount: 0,
     },
-    promocode: {
-        value: "",
-        onChange: () => undefined,
-    }
+    onPromocodeChange: () => undefined,
 };
 
 export const CalculatorContext = React.createContext<CalculatorContextValue>(CalculatorContextDefaultValue);

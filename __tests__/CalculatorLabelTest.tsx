@@ -23,10 +23,7 @@ describe("<CalculatorLabel />", () => {
             rate: 0.0175,
             amount: 100,
         },
-        promocode: {
-            value: "",
-            onChange: () => undefined,
-        }
+        onPromocodeChange: () => undefined,
     };
 
     it("have to render term value", () => {
