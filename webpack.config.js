@@ -20,7 +20,9 @@ const
 console.log("Building in " + env + " environment. Debug: " + debug.toString());
 
 const config = {
-    entry: ["./src/index.ts"],
+    entry: {
+        index: "./src/index.ts",
+    },
 
     target: "node",
     externals: [nodeExternals()],
@@ -29,7 +31,7 @@ const config = {
         filename: 'index.js',
         path: path.resolve('./build'),
         publicPath: "/",
-        library: "bobra-calculator",
+        library: "react-credit-calculator",
         libraryTarget: "umd",
     },
 
@@ -44,58 +46,49 @@ const config = {
     },
 
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.tsx?$/,
-                loaders: [
+                use: [
                     {
-                        loader: "babel-loader",
-                        query: {
-                            presets: ["latest", "react",],
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                '@babel/preset-react',
+                                [
+                                    '@babel/preset-env',
+                                    {
+                                        exclude: ["transform-regenerator"],
+                                    },
+                                ],
+                            ],
                         },
                     },
                     "awesome-typescript-loader",
-                ],
-            }
-            ,
+                ]
+            },
             {
-                test: /\.jsx?$/,
-                exclude: [/node_modules/],
-                loader: "babel-loader",
-                query: {
-                    presets: ["latest", "react",]
+                test: /\.m?js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-react', '@babel/preset-env',],
+                    },
                 },
             },
             {
                 enforce: "pre",
                 test: /\.js$/,
-                loader: "source-map-loader",
-            },
-        ],
+                use: "source-map-loader"
+            }
+        ]
     },
 
     plugins: [
         new webpack.NamedModulesPlugin(),
         new CleanWebpackPlugin(path.resolve('./build')),
         new webpack.optimize.ModuleConcatenationPlugin(),
-        new webpack.NodeEnvironmentPlugin(),
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify(env),
-            },
-        }),
-        new CircularDependencyPlugin({
-            // exclude detection of files based on a RegExp
-            exclude: /node_modules/,
-            // add errors to webpack instead of warnings
-            failOnError: true,
-            // override `exclude` and `failOnError` behavior
-            // `onDetected` is called for each module that is cyclical
-            onDetected({paths, compilation}) {
-                // `paths` will be an Array of the relative module paths that make up the cycle
-                compilation.errors.push(new Error(paths.join(' -> ')))
-            }
-        })
     ]
 };
 
