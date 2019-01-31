@@ -17,7 +17,7 @@ npm i react-credit-calculator@^2.0
 
 ```typescript jsx
 import * as React from "react";
-import * as Calculator from "./src";
+import * as Calculator from "react-credit-calculator";
 
 const conditions: Calculator.ControllerProps = {
     interestRate: 0.0175, // 1.75% per day
@@ -72,7 +72,7 @@ return (
 Using context manually:
 ```typescript jsx
 import * as React from "react";
-import * as Calculator from "./src";
+import * as Calculator from "react-credit-calculator";
 
 return (
     <Calculator.Controller>{/** Include props */}
