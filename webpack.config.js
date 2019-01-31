@@ -31,7 +31,7 @@ const config = {
         filename: 'index.js',
         path: path.resolve('./build'),
         publicPath: "/",
-        library: "react-img-webp",
+        library: "react-credit-calculator",
         libraryTarget: "umd",
     },
 

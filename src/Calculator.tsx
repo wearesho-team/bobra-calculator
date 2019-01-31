@@ -4,10 +4,6 @@ import { CalculatorContext, CalculatorContextValue } from "./CalculatorContext";
 export interface CalculatorState {
     term: number,
     amount: number,
-    promocode?: {
-        value: string;
-        discount: number;
-    };
 }
 
 export interface CalculatorProps {
@@ -24,7 +20,6 @@ export interface CalculatorProps {
         initial?: number,
         step?: number,
     },
-    promocode?: string;
 
     onAmountChange?: (nextAmount: number) => void,
     onTermChange?: (nextTerm: number) => void,
@@ -34,24 +29,12 @@ export class Calculator extends React.PureComponent<CalculatorProps, CalculatorS
     public readonly state: CalculatorState = {
         term: this.props.term.initial || Math.round((this.props.term.min + this.props.term.max) / 2),
         amount: this.props.amount.initial || Math.round((this.props.amount.min + this.props.amount.max) / 2),
-        promocode: this.props.promocode
-            ? {
-                value: this.props.promocode,
-                discount: 0,
-            }
-            : undefined
     };
 
     public get interest(): { amount: number, rate: number } {
-        let rate = this.props.interestRate;
-
-        if (this.state.promocode) {
-            rate = rate - rate * this.state.promocode.discount;
-        }
-
         return {
-            amount: Math.round(this.state.term * rate * this.state.amount),
-            rate,
+            amount: Math.round(this.state.term * this.props.interestRate * this.state.amount),
+            rate: this.props.interestRate,
         };
     }
 
@@ -76,8 +59,6 @@ export class Calculator extends React.PureComponent<CalculatorProps, CalculatorS
                 onChange: this.handleTermChange,
             },
             interest: this.interest,
-            promocode: this.state.promocode,
-            onPromocodeChange: this.handlePromocodeChange,
         };
     }
 
@@ -100,9 +81,5 @@ export class Calculator extends React.PureComponent<CalculatorProps, CalculatorS
 
         this.setState({ term: nextTerm });
         return nextTerm;
-    };
-
-    protected handlePromocodeChange = (promocode?: { value: string; discount: number }) => {
-        this.setState({ promocode });
     };
 }
