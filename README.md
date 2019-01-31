@@ -69,6 +69,21 @@ return (
 );
 ```
 
+Using context manually:
+```typescript jsx
+import * as React from "react";
+import * as Calculator from "./src";
+
+return (
+    <Calculator.Controller>{/** Include props */}
+        <Calculator.Context.Consumer>
+            {(value) => console.log(value) /** do something */}
+        </Calculator.Context.Consumer>
+    </Calculator.Controller>
+);
+```
+see [ContextValue](./src/Context.ts) for details.
+
 ## Suggests
 - [react-credit-calculator-slider](https://github.com/wearesho-team/react-credit-calculator-slider) - rc-slider integration
 

@@ -50,9 +50,9 @@ export class Controller extends React.PureComponent<ControllerProps, ControllerS
             },
             term: {
                 value: this.state.term,
-                min: this.props.amount.min,
-                max: this.props.amount.max,
-                step: this.props.amount.step,
+                min: this.props.term.min,
+                max: this.props.term.max,
+                step: this.props.term.step,
                 onChange: this.handleTermChange,
             },
             interest: this.interest,

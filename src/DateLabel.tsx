@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Context, ContextValue } from "./Context";
 
-export interface DateLabelProps {
+export interface DateLabelProps extends React.HTMLProps<HTMLSpanElement> {
     format?: (date: Date) => string,
 }
 
