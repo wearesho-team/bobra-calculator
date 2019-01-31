@@ -1,13 +1,13 @@
 import * as React from "react";
-import { CalculatorControlContext, CalculatorControlContextValue } from "./CalculatorControlContext";
+import { ControlContext, ControlContextValue } from "./ControlContext";
 
-export interface CalculatorButtonProps extends React.HTMLProps<HTMLButtonElement> {
+export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
     increase: boolean,
 }
 
-export class CalculatorButton extends React.PureComponent<CalculatorButtonProps> {
-    public static readonly contextType = CalculatorControlContext;
-    public readonly context: CalculatorControlContextValue;
+export class Button extends React.PureComponent<ButtonProps> {
+    public static readonly contextType = ControlContext;
+    public readonly context: ControlContextValue;
 
     public get isDisabled(): boolean {
         return this.props.increase

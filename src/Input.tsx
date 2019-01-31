@@ -1,9 +1,9 @@
 import * as React from "react";
-import { CalculatorControlContext, CalculatorControlContextValue } from "./CalculatorControlContext";
+import { ControlContext, ControlContextValue } from "./ControlContext";
 
-export class CalculatorInput extends React.PureComponent<React.HTMLProps<HTMLInputElement>> {
-    public static readonly contextType = CalculatorControlContext;
-    public readonly context: CalculatorControlContextValue;
+export class Input extends React.PureComponent<React.HTMLProps<HTMLInputElement>> {
+    public static readonly contextType = ControlContext;
+    public readonly context: ControlContextValue;
     protected input = React.createRef<HTMLInputElement>();
 
     public componentDidUpdate() {

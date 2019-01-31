@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export interface CalculatorControlContextValue {
+export interface ControlContextValue {
     min: number,
     max: number,
     step: number,
@@ -8,7 +8,7 @@ export interface CalculatorControlContextValue {
     onChange: (next: number) => number,
 }
 
-export const CalculatorControlContext = React.createContext<CalculatorControlContextValue>({
+export const ControlContext = React.createContext<ControlContextValue>({
     min: 0,
     max: 0,
     step: 1,

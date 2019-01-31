@@ -1,13 +1,13 @@
 import * as React from "react";
-import { CalculatorContext, CalculatorContextValue } from "./CalculatorContext";
+import { Context, ContextValue } from "./Context";
 
-export interface CalculatorSummaryButtonProps extends React.HTMLProps<HTMLButtonElement> {
+export interface SummaryButtonProps extends React.HTMLProps<HTMLButtonElement> {
     onSummary: (state: { term: number, amount: number }) => void;
 }
 
-export class CalculatorSummaryButton extends React.PureComponent<CalculatorSummaryButtonProps> {
-    public static readonly contextType = CalculatorContext;
-    public readonly context: CalculatorContextValue;
+export class SummaryButton extends React.PureComponent<SummaryButtonProps> {
+    public static readonly contextType = Context;
+    public readonly context: ContextValue;
 
     public render(): JSX.Element {
         const { onSummary, ...childProps } = this.props;

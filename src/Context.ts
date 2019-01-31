@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export interface CalculatorContextValue {
+export interface ContextValue {
     amount: {
         min: number;
         max: number;
@@ -21,7 +21,7 @@ export interface CalculatorContextValue {
     };
 }
 
-export const CalculatorContextDefaultValue: CalculatorContextValue = {
+export const ContextDefaultValue: ContextValue = {
     amount: {
         min: 250,
         max: 2000,
@@ -42,4 +42,4 @@ export const CalculatorContextDefaultValue: CalculatorContextValue = {
     },
 };
 
-export const CalculatorContext = React.createContext<CalculatorContextValue>(CalculatorContextDefaultValue);
+export const Context = React.createContext<ContextValue>(ContextDefaultValue);

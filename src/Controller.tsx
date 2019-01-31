@@ -1,12 +1,12 @@
 import * as React from "react";
-import { CalculatorContext, CalculatorContextValue } from "./CalculatorContext";
+import { Context, ContextValue } from "./Context";
 
-export interface CalculatorState {
+export interface ControllerState {
     term: number,
     amount: number,
 }
 
-export interface CalculatorProps {
+export interface ControllerProps {
     interestRate: number,
     amount: {
         max: number,
@@ -20,13 +20,10 @@ export interface CalculatorProps {
         initial?: number,
         step?: number,
     },
-
-    onAmountChange?: (nextAmount: number) => void,
-    onTermChange?: (nextTerm: number) => void,
 }
 
-export class Calculator extends React.PureComponent<CalculatorProps, CalculatorState> {
-    public readonly state: CalculatorState = {
+export class Controller extends React.PureComponent<ControllerProps, ControllerState> {
+    public readonly state: ControllerState = {
         term: this.props.term.initial || Math.round((this.props.term.min + this.props.term.max) / 2),
         amount: this.props.amount.initial || Math.round((this.props.amount.min + this.props.amount.max) / 2),
     };
@@ -39,10 +36,10 @@ export class Calculator extends React.PureComponent<CalculatorProps, CalculatorS
     }
 
     public render() {
-        return <CalculatorContext.Provider value={this.contextValue} children={this.props.children}/>
+        return <Context.Provider value={this.contextValue} children={this.props.children}/>
     }
 
-    protected get contextValue(): CalculatorContextValue {
+    protected get contextValue(): ContextValue {
         return {
             amount: {
                 value: this.state.amount,
