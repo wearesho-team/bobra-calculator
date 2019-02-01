@@ -1,6 +1,6 @@
 {
   "name": "react-credit-calculator",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Simple credit calculator",
   "main": "build/index.js",
   "typings": "build/src/index.d.ts",
