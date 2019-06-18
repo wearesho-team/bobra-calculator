@@ -5,12 +5,12 @@
 ## Features
 - Implementing simple credit calculators using React Context
 - Written on Typescript
-- Using 
+- Only function components and hooks
 
 ## Installation
 Using [npm](https://npmjs.com/)
 ```bash
-npm i react-credit-calculator@^2.0
+npm i react-credit-calculator@^3.0
 ```
 
 ## Usage
