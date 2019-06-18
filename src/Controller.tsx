@@ -22,61 +22,54 @@ export interface ControllerProps {
     },
 }
 
-export class Controller extends React.PureComponent<ControllerProps, ControllerState> {
-    public readonly state: ControllerState = {
-        term: this.props.term.initial || Math.round((this.props.term.min + this.props.term.max) / 2),
-        amount: this.props.amount.initial || Math.round((this.props.amount.min + this.props.amount.max) / 2),
+export const Controller: React.FC<ControllerProps> = (props) => {
+    const [term, setTerm] = React.useState<number>(
+        props.term.initial || Math.round((props.term.min + props.term.max) / 2)
+    );
+    const [amount, setAmount] = React.useState<number>(
+        props.amount.initial || Math.round((props.amount.min + props.amount.max) / 2)
+    );
+    const interest: { amount: number, rate: number } = {
+        amount: Math.round(term * props.interestRate * amount),
+        rate: props.interestRate,
     };
+    const handleAmountChange: (next: number) => number = React.useCallback((nextAmount) => {
+        nextAmount = Math.max(props.amount.min, nextAmount);
+        nextAmount = Math.min(props.amount.max, nextAmount);
 
-    public get interest(): { amount: number, rate: number } {
-        return {
-            amount: Math.round(this.state.term * this.props.interestRate * this.state.amount),
-            rate: this.props.interestRate,
-        };
-    }
-
-    public render() {
-        return <Context.Provider value={this.contextValue} children={this.props.children}/>
-    }
-
-    protected get contextValue(): ContextValue {
-        return {
-            amount: {
-                value: this.state.amount,
-                min: this.props.amount.min,
-                max: this.props.amount.max,
-                step: this.props.amount.step,
-                onChange: this.handleAmountChange,
-            },
-            term: {
-                value: this.state.term,
-                min: this.props.term.min,
-                max: this.props.term.max,
-                step: this.props.term.step,
-                onChange: this.handleTermChange,
-            },
-            interest: this.interest,
-        };
-    }
-
-    protected handleAmountChange = (nextAmount: number): number => {
-        nextAmount = Math.max(this.props.amount.min, nextAmount);
-        nextAmount = Math.min(this.props.amount.max, nextAmount);
-
-        this.setState({ amount: nextAmount });
+        setAmount(nextAmount);
 
         return nextAmount;
-    };
-
-    protected handleTermChange = (nextTerm: number): number => {
-        if (this.props.term === undefined) {
+    }, [props.amount.min, props.amount.max, setAmount]);
+    const handleTermChange: (next: number) => number = React.useCallback((nextTerm) => {
+        if (props.term === undefined) {
             return;
         }
 
-        nextTerm = Math.max(this.props.term.min, nextTerm);
-        nextTerm = Math.min(this.props.term.max, nextTerm);
+        nextTerm = Math.max(props.term.min, nextTerm);
+        nextTerm = Math.min(props.term.max, nextTerm);
+        setTerm(nextTerm);
 
-        this.setState({ term: nextTerm });
         return nextTerm;
+    }, [props.term, setTerm]);
+
+    const context: ContextValue = {
+        amount: {
+            value: amount,
+            min: props.amount.min,
+            max: props.amount.max,
+            step: props.amount.step,
+            onChange: handleAmountChange,
+        },
+        term: {
+            value: term,
+            min: props.term.min,
+            max: props.term.max,
+            step: props.term.step,
+            onChange: handleTermChange,
+        },
+        interest,
     };
-}
+
+    return <Context.Provider value={context} children={props.children}/>;
+};

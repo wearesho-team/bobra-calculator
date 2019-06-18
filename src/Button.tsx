@@ -5,31 +5,25 @@ export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
     increase: boolean,
 }
 
-export class Button extends React.PureComponent<ButtonProps> {
-    public static readonly contextType = ControlContext;
-    public readonly context: ControlContextValue;
+export const Button: React.FC<ButtonProps> = (props) => {
+    const { increase, children, ...childProps } = props;
 
-    public get isDisabled(): boolean {
-        return this.props.increase
-            ? this.context.value >= this.context.max
-            : this.context.value <= this.context.max;
-    }
-
-    public render(): JSX.Element {
-        const { increase, ...props } = this.props;
-        return (
-            <button {...props} disabled={this.isDisabled} onClick={this.handleClick}>
-                {this.props.children}
-            </button>
-        );
-    }
-
-    protected handleClick = () => {
-        if (this.isDisabled) {
+    const context = React.useContext(ControlContext);
+    const isDisabled = increase
+        ? context.value >= context.max
+        : context.value <= context.max;
+    const handleClick = React.useCallback(() => {
+        if (isDisabled) {
             return;
         }
-        const delta = this.props.increase ? 1 : -1;
 
-        this.context.onChange(this.context.value + delta * this.context.step);
-    }
-}
+        const delta = increase ? 1 : -1;
+        context.onChange(context.value + delta * context.step);
+    }, [ isDisabled, increase, context.value, context.step ]);
+
+    return (
+        <button {...props} disabled={isDisabled} onClick={handleClick}>
+            {children}
+        </button>
+    );
+};

@@ -13,12 +13,7 @@ function getLabelChildren(value: ContextValue, format?: (date: Date) => string):
     return format ? format(returnDate) : returnDate.toLocaleDateString("en-US");
 }
 
-export const DateLabel: React.FunctionComponent<DateLabelProps> = ({ format, ...childProps }) => {
-    return (
-        <Context.Consumer>
-            {(value) => (
-                <span aria-label="return-date" {...childProps}>{getLabelChildren(value, format)}</span>
-            )}
-        </Context.Consumer>
-    );
+export const DateLabel: React.FC<DateLabelProps> = ({ format, ...childProps }) => {
+    const context = React.useContext(Context);
+    return <span aria-label="return-date" {...childProps}>{getLabelChildren(context, format)}</span>;
 };

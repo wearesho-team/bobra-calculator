@@ -27,11 +27,6 @@ function getLabelChildren(labelType: LabelType, value: ContextValue): string | n
 }
 
 export const Label: React.FunctionComponent<LabelProps> = ({ labelType, ...childProps }) => {
-    return (
-        <Context.Consumer>
-            {(value) => (
-                <span aria-label={labelType} {...childProps}>{getLabelChildren(labelType, value)}</span>
-            )}
-        </Context.Consumer>
-    );
+    const context = React.useContext(Context);
+    return <span aria-label={labelType} {...childProps}>{getLabelChildren(labelType, context)}</span>;
 };

@@ -11,8 +11,7 @@ export interface ControlWrapperProps {
     type: ControlTypes,
 }
 
-export const ControlWrapper: React.FunctionComponent<ControlWrapperProps> = (props) => (
-    <Context.Consumer>
-        {(value) => <ControlContext.Provider children={props.children} value={value[ props.type ]}/>}
-    </Context.Consumer>
-);
+export const ControlWrapper: React.FunctionComponent<ControlWrapperProps> = (props) => {
+    const context = React.useContext(Context);
+    return <ControlContext.Provider children={props.children} value={context[ props.type ]}/>;
+};
