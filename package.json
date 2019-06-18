@@ -1,6 +1,6 @@
 {
   "name": "react-credit-calculator",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Simple credit calculator",
   "main": "dist/react-credit-calculator.cjs.js",
   "module": "dist/react-credit-calculator.esm.js",
