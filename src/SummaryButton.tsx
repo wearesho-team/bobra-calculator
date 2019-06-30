@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Context, ContextValue } from "./Context";
 
-export interface SummaryButtonProps extends React.HTMLProps<HTMLButtonElement> {
+export interface SummaryButtonProps
+    extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     onSummary: (state: { term: number, amount: number }) => void;
 }
 

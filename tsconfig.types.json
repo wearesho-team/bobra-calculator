@@ -9,5 +9,10 @@
     "allowJs": false,
     "emitDeclarationOnly": true
   },
-  "exclude": ["__tests__/*", "dist/*", "src/setupTests.ts"]
+  "exclude": [
+    "__tests__/*",
+    "node_modules/*",
+    "dist/*",
+    "src/setupTests.ts"
+  ]
 }

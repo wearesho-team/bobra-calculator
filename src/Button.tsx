@@ -1,7 +1,8 @@
 import * as React from "react";
 import { ControlContext, ControlContextValue } from "./ControlContext";
 
-export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+export interface ButtonProps
+    extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     increase: boolean,
 }
 
