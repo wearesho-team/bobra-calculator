@@ -12,7 +12,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
     const context = React.useContext(ControlContext);
     const isDisabled = increase
         ? context.value >= context.max
-        : context.value <= context.max;
+        : context.value <= context.min;
     const handleClick = React.useCallback(() => {
         if (isDisabled) {
             return;
