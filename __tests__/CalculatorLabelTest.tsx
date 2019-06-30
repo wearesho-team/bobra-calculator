@@ -62,4 +62,48 @@ describe("<Calculator.Label />", () => {
             `<span aria-label="total">${value.amount.value + value.interest.amount}</span>`
         );
     });
+
+    it("have to render min amount value", () => {
+        const wrapper = mount(
+            <Calculator.Context.Provider value={value}>
+                <Calculator.Label labelType={Calculator.LabelType.minAmount}/>
+            </Calculator.Context.Provider>
+        );
+        expect(wrapper.html()).toEqual(
+            `<span aria-label="minAmount">${value.amount.min}</span>`
+        );
+    });
+
+    it("have to render max amount value", () => {
+        const wrapper = mount(
+            <Calculator.Context.Provider value={value}>
+                <Calculator.Label labelType={Calculator.LabelType.maxAmount}/>
+            </Calculator.Context.Provider>
+        );
+        expect(wrapper.html()).toEqual(
+            `<span aria-label="maxAmount">${value.amount.max}</span>`
+        );
+    });
+
+    it("have to render min term value", () => {
+        const wrapper = mount(
+            <Calculator.Context.Provider value={value}>
+                <Calculator.Label labelType={Calculator.LabelType.minTerm}/>
+            </Calculator.Context.Provider>
+        );
+        expect(wrapper.html()).toEqual(
+            `<span aria-label="minTerm">${value.term.min}</span>`
+        );
+    });
+
+    it("have to render max term value", () => {
+        const wrapper = mount(
+            <Calculator.Context.Provider value={value}>
+                <Calculator.Label labelType={Calculator.LabelType.maxTerm}/>
+            </Calculator.Context.Provider>
+        );
+        expect(wrapper.html()).toEqual(
+            `<span aria-label="maxTerm">${value.term.max}</span>`
+        );
+    });
 });

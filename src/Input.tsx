@@ -3,7 +3,7 @@ import { ControlContext, ControlContextValue } from "./ControlContext";
 
 export const Input: React.FC<React.HTMLProps<HTMLInputElement>> = (props) => {
     const context = React.useContext(ControlContext);
-    const input = React.useRef<HTMLInputElement>(undefined);
+    const input = React.useRef<HTMLInputElement>(null);
     const handleBlur = React.useCallback((event: React.FormEvent<HTMLInputElement>) => {
         context.onChange(Number(event.currentTarget.value));
     }, [ context.onChange ]);

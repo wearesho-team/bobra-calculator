@@ -7,6 +7,10 @@ export enum LabelType {
     total = "total",
     amount = "amount",
     interest = "interest",
+    minAmount = "minAmount",
+    maxAmount = "maxAmount",
+    minTerm = "minTerm",
+    maxTerm = "maxTerm",
 }
 
 export interface LabelProps extends React.HTMLProps<HTMLSpanElement> {
@@ -23,6 +27,14 @@ function getLabelChildren(labelType: LabelType, value: ContextValue): string | n
             return value.term.value;
         case LabelType.total:
             return Math.round(value.amount.value + value.interest.amount);
+        case LabelType.minAmount:
+            return value.amount.min;
+        case LabelType.maxAmount:
+            return value.amount.max;
+        case LabelType.minTerm:
+            return value.term.min;
+        case LabelType.maxTerm:
+            return value.term.max;
     }
 }
 

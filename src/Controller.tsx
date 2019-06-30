@@ -23,10 +23,12 @@ export interface ControllerProps {
 }
 
 export const Controller: React.FC<ControllerProps> = (props) => {
-    const [term, setTerm] = React.useState<number>(
-        props.term.initial || Math.round((props.term.min + props.term.max) / 2)
+    const [ term, setTerm ] = React.useState<number>(
+        props.term
+            ? props.term.initial || Math.round((props.term.min + props.term.max) / 2)
+            : 1
     );
-    const [amount, setAmount] = React.useState<number>(
+    const [ amount, setAmount ] = React.useState<number>(
         props.amount.initial || Math.round((props.amount.min + props.amount.max) / 2)
     );
     const interest: { amount: number, rate: number } = {
@@ -40,7 +42,7 @@ export const Controller: React.FC<ControllerProps> = (props) => {
         setAmount(nextAmount);
 
         return nextAmount;
-    }, [props.amount.min, props.amount.max, setAmount]);
+    }, [ props.amount.min, props.amount.max, setAmount ]);
     const handleTermChange: (next: number) => number = React.useCallback((nextTerm) => {
         if (props.term === undefined) {
             return;
@@ -51,21 +53,21 @@ export const Controller: React.FC<ControllerProps> = (props) => {
         setTerm(nextTerm);
 
         return nextTerm;
-    }, [props.term, setTerm]);
+    }, [ props.term, setTerm ]);
 
     const context: ContextValue = {
         amount: {
             value: amount,
             min: props.amount.min,
             max: props.amount.max,
-            step: props.amount.step,
+            step: props.amount.step || 1,
             onChange: handleAmountChange,
         },
         term: {
             value: term,
-            min: props.term.min,
-            max: props.term.max,
-            step: props.term.step,
+            min: props.term ? props.term.min : 1,
+            max: props.term ? props.term.max : 1,
+            step: props.term ? props.term.step || 1 : 1,
             onChange: handleTermChange,
         },
         interest,
