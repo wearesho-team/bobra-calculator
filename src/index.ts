@@ -7,3 +7,4 @@ export * from "./DateLabel";
 export * from "./Input";
 export * from "./Label";
 export * from "./SummaryButton";
+export * from "./Range";
