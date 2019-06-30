@@ -23,7 +23,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
     }, [ isDisabled, increase, context.value, context.step ]);
 
     return (
-        <button {...props} disabled={isDisabled} onClick={handleClick}>
+        <button {...childProps} disabled={isDisabled} onClick={handleClick}>
             {children}
         </button>
     );
